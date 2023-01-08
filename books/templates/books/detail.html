@@ -1,0 +1,43 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'books/style.css' %}" />
+<div class="container mt-4 text-left">
+  <h1 class="my-4">Book Detail</h1>
+  <hr />
+  <h3>{{ book.book_name }}</h3>
+  <br />
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Author</th>
+        <th scope="col">Author Bio</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">Publisher Address</th>
+        <th scope="col">Publish Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-active">
+        <td scope="row">
+          <a href="{% url 'books:authors' book.writer.id %}">{{book.writer}}</a>
+        </td>
+        <td>{{book.writer.author_bio}}</td>
+        {% comment %}
+        <td>{{book.published_by}}</td>
+        {% endcomment %}
+
+        <td scope="row">
+          <a href="{% url 'books:publishers' book.published_by.id %}"
+            >{{book.published_by}}</a
+          >
+        </td>
+
+        <td>{{book.published_by.publisher_address}}</td>
+        <td>{{book.published_date}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-secondary my-2 mx-2 px-4 py-2">
+    <a class="text-decoration-none" href="{% url 'books:index' %}">Back</a>
+  </button>
+</div>
